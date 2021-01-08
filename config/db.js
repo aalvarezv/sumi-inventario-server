@@ -1,6 +1,5 @@
 const { Sequelize } = require('sequelize')
 const {productosData} = require('./productos') 
-require('dotenv').config({ path: './variables.env' })
 
 const ConfiguracionModel = require('../models/Configuracion')
 const UsuarioModel = require('../models/Usuario')

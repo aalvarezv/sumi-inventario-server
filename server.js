@@ -1,3 +1,8 @@
+if(process.env.NODE_ENV === "PRD"){
+    require('dotenv').config({ path: './prd.env' })
+}else if(process.env.NODE_ENV === "DEV"){
+    require('dotenv').config({ path: './dev.env' })
+}
 const express = require('express')
 const cors = require('cors')
 const bodyParser = require('body-parser')

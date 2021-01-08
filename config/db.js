@@ -41,33 +41,29 @@ RackProducto.belongsTo(Producto, {foreignKey : 'codigo_producto'})
 RackProducto.belongsTo(Rack, {foreignKey : 'codigo_rack'})
 RackProducto.belongsTo(Usuario, {foreignKey: 'codigo_usuario'})
 
-console.log(productosData)
-
 sequelize.sync({ force: false }).then(async() => {
 
         try {
             console.log('**** CONECTADO A LA BASE DE DATOS ****')
-          
-            const usuarios = await Usuario.bulkCreate([{
-                codigo: '162323695',
-                clave: '123456',
-                nombre: 'Alan Patricio Alvarez Vargas',
-                email: 'alvarez.vargas@gmail.com',
-                telefono: '0',
-            }])
-            console.log('USUARIOS INSERTADOS')
+            
+            let usuarioExiste = Usuario.findByPk('162323695');
+            if(!usuarioExiste){
+                await Usuario.create({
+                    codigo: '162323695',
+                    clave: '123456',
+                    nombre: 'Alan Patricio Alvarez Vargas',
+                    email: 'alvarez.vargas@gmail.com',
+                    telefono: '0',
+                })
+                
+            }
+            console.log('OK USUARIOS')
 
-            const racks = await Rack.bulkCreate([{
-                codigo: 'R1',
-                descripcion: 'RACK 1',
-            },{
-                codigo: 'R2',
-                descripcion: 'RACK 2',
-            },{
-                codigo: 'R3',
-                descripcion: 'RACK 3',
+            await Rack.bulkCreate([{
+                codigo: 'CB-UBICACION-1',
+                descripcion: 'UBICACION 1'
             }])
-            console.log('RACKS INSERTADOS')
+            console.log('OK RACKS')
             
             let productosDuplicados = []
             for(let producto of productosData){
@@ -84,8 +80,7 @@ sequelize.sync({ force: false }).then(async() => {
                }
 
             }
-            console.log('PRODUCTOS INSERTADOS')
-            console.log('DUPLICADOS', productosDuplicados)
+            console.log('OK PRODUCTOS')
           
         } catch (error) {
             console.log(error)

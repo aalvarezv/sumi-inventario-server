@@ -5,7 +5,7 @@ const getRack = async (req, res) => {
     
     try { 
 
-        const { codigo, codigo_usuario } = req.params 
+        const { codigo, codigo_usuario } = req.query 
         //revisa que el rack existe
         let rack = await Rack.findByPk(codigo);
         if (!rack) {

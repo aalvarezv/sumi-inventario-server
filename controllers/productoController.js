@@ -7,7 +7,7 @@ const getProducto = async (req, res) => {
     
     try{
         
-        const { codigo } = req.params
+        const { codigo } = req.query
         //revisa que el producto existe
         let producto = await Producto.findByPk(codigo)
         if (!producto) {

@@ -43,7 +43,7 @@ RackProducto.belongsTo(Producto, {foreignKey : 'codigo_producto'})
 RackProducto.belongsTo(Rack, {foreignKey : 'codigo_rack'})
 RackProducto.belongsTo(Usuario, {foreignKey: 'codigo_usuario'})
 
-sequelize.sync({ force: true }).then(async() => {
+sequelize.sync({ force: Number(process.env.FORCE_DB) }).then(async() => {
 
         try {
             console.log('**** CONECTADO A LA BASE DE DATOS ****')

@@ -9,10 +9,11 @@ const getRack = async (req, res) => {
         //revisa que el rack existe
         let rack = await Rack.findByPk(codigo);
         if (!rack) {
-            console.log('El código rack no existe')
-            return res.status(400).json({
-                msg: 'El código rack no existe'
-            })
+            //Si el rack no existe, entonces lo crea.
+            rack = await Rack.create({
+                codigo,
+                descripcion: codigo,
+            })   
         }
     
         //devuelve la cantidad de productos inventariados en el rack por el usuario

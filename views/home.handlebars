@@ -11,6 +11,7 @@
         <tr>
         <th scope="col">#</th>
         <th scope="col">Rack</th>
+        <th scope="col">Código producto</th>
         <th scope="col">Producto</th>
         <th scope="col">Usuario</th>
         <th scope="col">Cantidad</th>
@@ -23,6 +24,7 @@
             <tr>
                 <th scope="row">{{math @index "+" 1}}</th>
                 <td>{{this.rack.descripcion}}</td>
+                <td>{{this.producto.codigo}}</td>
                 <td>{{this.producto.descripcion}}</td>
                 <td>{{this.usuario.nombre}}</td>
                 <td>{{this.total}}</td>

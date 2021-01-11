@@ -6,6 +6,7 @@ const UsuarioModel = require('../models/Usuario')
 const RackModel = require('../models/Rack')
 const ProductoModel = require('../models/Producto')
 const RackProductoModel = require('../models/RackProducto')
+const MaquinaModel = require('../models/Maquina')
 
 //conexión a la bd
 const sequelize = new Sequelize(process.env.DB_URI, {
@@ -33,6 +34,7 @@ const Configuracion = ConfiguracionModel(sequelize)
 const Usuario = UsuarioModel(sequelize)
 const Rack = RackModel(sequelize)
 const Producto = ProductoModel(sequelize)
+const Maquina = MaquinaModel(sequelize)
 const RackProducto = RackProductoModel(sequelize, Usuario, Rack, Producto)
 
 
@@ -41,7 +43,7 @@ RackProducto.belongsTo(Producto, {foreignKey : 'codigo_producto'})
 RackProducto.belongsTo(Rack, {foreignKey : 'codigo_rack'})
 RackProducto.belongsTo(Usuario, {foreignKey: 'codigo_usuario'})
 
-sequelize.sync({ force: false }).then(async() => {
+sequelize.sync({ force: true }).then(async() => {
 
         try {
             console.log('**** CONECTADO A LA BASE DE DATOS ****')
@@ -93,6 +95,7 @@ module.exports = {
     Usuario, 
     Rack,
     Producto,
+    Maquina,
     RackProducto,
     sequelize,
 }

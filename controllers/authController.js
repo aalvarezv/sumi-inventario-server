@@ -1,12 +1,28 @@
-const {Usuario} = require('../config/db');
+const {Usuario, Maquina} = require('../config/db');
 const bcrypt = require('bcryptjs');
 
 const autenticarUsuario = async (req, res) => {
     
     try { 
-        const { codigo, clave } = req.body
+        const { codigo, clave, codigo_maquina } = req.body
 
         console.log(req.body);
+
+        let maquina = await Maquina.findByPk(codigo_maquina);
+        if(!maquina){
+            console.log('La máquina no está registrada, no puede operar.')
+            return res.status(400).json({
+                msg: 'La máquina no está registrada, no puede operar.'
+            })
+        }
+
+        if(maquina.inactiva){
+            console.log('La máquina se encuentra inactiva, no puede operar.')
+            return res.status(400).json({
+                msg: 'La máquina se encuentra inactiva, no puede operar.'
+            })
+        }
+
         //revisa que el usuario existe
         let usuario = await Usuario.findByPk(codigo);
         if (!usuario) {

@@ -1,6 +1,6 @@
 const { DataTypes } = require('sequelize')
 
-module.exports = (sequelize, Usuario, Rack, Producto) => {
+module.exports = (sequelize, Usuario, Rack, Producto, Maquina) => {
 
     return sequelize.define('rack_producto', {
         codigo:{
@@ -29,6 +29,14 @@ module.exports = (sequelize, Usuario, Rack, Producto) => {
             allownull: false,
             references:{
                 model: Producto,
+                key: 'codigo'
+            }
+        },
+        codigo_maquina:{
+            type: DataTypes.STRING(128),
+            allownull: false,
+            references:{
+                model: Maquina,
                 key: 'codigo'
             }
         },

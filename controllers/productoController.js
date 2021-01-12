@@ -28,11 +28,31 @@ const getProducto = async (req, res) => {
 
 }
 
+const getProductos = async (req, res) => {
+
+    try{
+        
+        //revisa que el producto existe
+        let productos = await Producto.findAll({
+            inactivo: false,
+        })
+        
+
+        res.json({
+            productos,
+        })
+
+    } catch (error) {
+        console.log(error)
+        res.status(400).send('Hubo un error')
+    }
+}
+
 const registrarProducto = async (req, res) => {
     
     try { 
 
-        const { codigo, codigo_rack, codigo_usuario, cantidad } = req.body
+        const { codigo, codigo_rack, codigo_usuario, cantidad, codigo_maquina } = req.body
        //revisa que el usuario existe
         let producto = await Producto.findByPk(codigo)
         if (!producto) {
@@ -49,6 +69,7 @@ const registrarProducto = async (req, res) => {
             codigo_rack,
             codigo_producto: codigo,
             cantidad,
+            codigo_maquina,
         })
     
         //devuelve la cantidad de productos inventariados en el rack por el usuario
@@ -91,5 +112,6 @@ const registrarProducto = async (req, res) => {
 
 module.exports = {
     registrarProducto,
-    getProducto
+    getProducto,
+    getProductos
 }

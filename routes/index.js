@@ -4,8 +4,6 @@ const app = express()
 app.use('/api/auth/', require('./auth'))
 app.use('/api/rack/', require('./rack'))
 app.use('/api/producto/', require('./producto'))
-
-//vista handlebars
-app.use('/view/', require('./view'))
+app.use('/api/registros/', require('./registro'))
 
 module.exports = app

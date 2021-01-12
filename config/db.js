@@ -35,8 +35,7 @@ const Usuario = UsuarioModel(sequelize)
 const Rack = RackModel(sequelize)
 const Producto = ProductoModel(sequelize)
 const Maquina = MaquinaModel(sequelize)
-const RackProducto = RackProductoModel(sequelize, Usuario, Rack, Producto)
-
+const RackProducto = RackProductoModel(sequelize, Usuario, Rack, Producto, Maquina)
 
 //Relaciones
 RackProducto.belongsTo(Producto, {foreignKey : 'codigo_producto'})

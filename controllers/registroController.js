@@ -35,6 +35,9 @@ exports.getRegistros = async (req, res) => {
                 ]
             },
             group: ['codigo_rack','codigo_producto'],
+            order: [
+                [Sequelize.literal('fecha_hora_ultima_marca'), 'DESC'],
+            ]
 
         })
         
